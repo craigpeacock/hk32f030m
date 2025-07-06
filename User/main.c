@@ -7,11 +7,14 @@
 #include "hk32f030m.h"
 #include "systick_delay.h"
 #include "gpio.h"
+#include "usart.h"
 
 int main(void)
 {
     SysTick_Init();
     GPIO_Config();
+    USART_Config();
+    printf("XY-CD60L Multipurpose Replacement Firmware\r\n");
 
     while (1)
     {
