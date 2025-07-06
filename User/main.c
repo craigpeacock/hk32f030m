@@ -9,6 +9,7 @@
 #include "gpio.h"
 #include "usart.h"
 #include "adc.h"
+#include "lcd.h"
 
 int main(void)
 {
@@ -19,6 +20,7 @@ int main(void)
     USART_Config();
     printf("XY-CD60L Multipurpose Replacement Firmware\r\n");
     ADC_Config();
+    LCD_Config();
 
     printf("Converting ADC CH1 (Input Voltage)");
 
@@ -33,6 +35,7 @@ int main(void)
          */
         ret = (uint16_t)(ret * 16.602963);
         printf("ADC CH0: %02d.%02d\r\n", ret / 1000, (ret % 1000)/10);
+        LCD_DisplayValue(LCD_LINE_1, ret /10, 2);
 
         SysTick_DelayMs(100);
     }
