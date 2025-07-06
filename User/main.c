@@ -8,29 +8,31 @@
 #include "systick_delay.h"
 #include "gpio.h"
 #include "usart.h"
+#include "adc.h"
 
 int main(void)
 {
+    int ret;
+
     SysTick_Init();
     GPIO_Config();
     USART_Config();
     printf("XY-CD60L Multipurpose Replacement Firmware\r\n");
+    ADC_Config();
+
+    printf("Converting ADC CH1 (Input Voltage)");
 
     while (1)
     {
-        // Button Up turns on Backlight
-        if (GPIO_ReadInputDataBit(BTN_UP_GPIO_PORT, BTN_UP_GPIO_PIN)) {
-            GPIO_ResetBits(BACKLIGHT_GPIO_PORT, BACKLIGHT_GPIO_PIN);
-        } else {
-            GPIO_SetBits(BACKLIGHT_GPIO_PORT, BACKLIGHT_GPIO_PIN);
-        }
-
-        // Button down turns on relay
-        if (GPIO_ReadInputDataBit(BTN_DOWN_GPIO_PORT, BTN_DOWN_GPIO_PIN)) {
-            GPIO_ResetBits(RELAY_GPIO_PORT, RELAY_GPIO_PIN);
-        } else {
-            GPIO_SetBits(RELAY_GPIO_PORT, RELAY_GPIO_PIN);
-        }
+        ret = ADC_ConvertByChannel(ADC_Channel_1);
+        /*
+         * Ch1 is connected to the power supply input (VIN+).
+         * This occurs via a voltage divider consisting of a 100k/5.1k resistor network (x20.6078)
+         * The converter is 12 bits (4096 steps) with FS/Vref being 3.3V
+         * Hence each step is 3.3/4096 x 20.6078 x 1000 (convert to mV)
+         */
+        ret = (uint16_t)(ret * 16.602963);
+        printf("ADC CH0: %02d.%02d\r\n", ret / 1000, (ret % 1000)/10);
 
         SysTick_DelayMs(100);
     }
