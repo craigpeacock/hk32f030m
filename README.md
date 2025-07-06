@@ -60,18 +60,18 @@
 Download the toolchain from [Arm GNU Toolchain Downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) according to your pc architecture, extract the files
 
 ```bash
-tar xvf gcc-arm-11.2-2022.02-x86_64-arm-none-eabi.tar.xz
-cd /opt/gcc-arm/
-sudo mv ~/Backup/linux/gcc-arm-11.2-2022.02-x86_64-arm-none-eabi/ .
-sudo chown -R root:root gcc-arm-11.2-2022.02-x86_64-arm-none-eabi/
+wget https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz
+sudo mkdir /opt/gcc-arm
+sudo tar xvf arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz -C /opt/gcc-arm/
 ```
 ## 2. Option #1: Install SEGGER J-Link
 
 Download and install JLink from [J-Link / J-Trace Downloads](https://www.segger.com/downloads/jlink/).
 
 ```bash
+wget https://www.segger.com/downloads/jlink/JLink_Linux_V848_x86_64.deb
 # installation command for .deb
-sudo dpkg -i JLink_Linux_V770a_x86_64.deb
+sudo dpkg -i JLink_Linux_V848_x86_64.deb
 ```
 The default installation directory is */opt/SEGGER*
 

@@ -18,9 +18,7 @@ FLASH_PROGRM	?= jlink
 ##### Toolchains #######
 
 # path to gcc arm
-#ARM_TOOCHAIN 	?= /opt/gcc-arm/gcc-arm-11.2-2022.02-x86_64-arm-none-eabi/bin
-#ARM_TOOCHAIN 	?= /opt/gcc-arm/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi/bin
-ARM_TOOCHAIN 	?= /opt/gcc-arm/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/bin
+ARM_TOOCHAIN 	?= /opt/gcc-arm/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi/bin
 
 # path to JLinkExe
 JLINKEXE		?= /opt/SEGGER/JLink/JLinkExe
